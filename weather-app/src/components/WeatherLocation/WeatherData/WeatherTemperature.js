@@ -14,7 +14,7 @@ import "./styles.css";
 const icons = {
   [CLOUD]: "cloud",
   [CLOUDY]: "cloudy",
-  [SUN]: "sun",
+  [SUN]: "day-sunny",
   [RAIN]: "rain",
   [SNOW]: "snow",
   [WINDY]: "windy"
