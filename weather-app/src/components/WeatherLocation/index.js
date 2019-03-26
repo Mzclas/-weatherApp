@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import tranformWeather from "../../services/transformWeather";
+import { api_weather } from "../../constans/api_url";
+
 import Location from "./Location";
 import WeatherData from "../WeatherLocation/WeatherData";
-import { CLOUD, CLOUDY, SUN, RAIN, SNOW, WINDY } from "../../constans/weathers";
 import "./styles.css";
+import { CLOUD, CLOUDY, SUN, RAIN, SNOW, WINDY } from "../../constans/weathers";
 
 const data = {
   temperature: 20,
@@ -11,28 +14,28 @@ const data = {
   wind: "10 k/h"
 };
 
-const data2 = {
-  temperature: 25,
-  weatherState: RAIN,
-  humidity: 50,
-  wind: "100 k/h"
-};
-
 class WeatherLocation extends Component {
   constructor() {
     super();
     this.state = {
-      city: "Madrid",
+      city: "Buenos Aires",
       data: data
     };
   }
 
   HandleUpdateClick = () => {
-    console.log("actualizado");
-    this.setState({
-      city: "Buenos aires",
-      data: data2
-    });
+    fetch(api_weather)
+      .then(resolve => {
+        return resolve.json();
+      })
+      .then(data => {
+        const newWeather = tranformWeather(data);
+        this.setState({
+          city: "Madrid",
+
+          data: newWeather
+        });
+      });
   };
 
   render() {
